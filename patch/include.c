@@ -26,7 +26,6 @@
 #include "decorationhints.c"
 #include "dragcfact.c"
 #include "exresize.c"
-#include "focusurgent.c"
 #include "killunsel.c"
 #include "moveresize.c"
 #include "pertag.c"

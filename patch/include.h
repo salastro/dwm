@@ -27,7 +27,6 @@
 #include "dragcfact.h"
 #include "dragmfact.h"
 #include "exresize.h"
-#include "focusurgent.h"
 #include "killunsel.h"
 #include "moveresize.h"
 #include "pertag.h"

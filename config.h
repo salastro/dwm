@@ -226,8 +226,6 @@ static char *statuscolors[][ColCount] = {
 static const char *const autostart[] = {
 	"clipmenud", NULL,
 	"dwmblocks", NULL,
-	"nm-applet", NULL,
-	"cbatticon", NULL,
 	"numlockx", NULL,
 	"sxhkd", NULL,
 	"touchegg", NULL,
@@ -235,8 +233,6 @@ static const char *const autostart[] = {
 	"picom", NULL,
 	"xss-lock", "slock", NULL,
 	"darkman", "run", NULL,
-	"flatpak", "run", "com.rtosta.zapzap", NULL,
-	// "firefox", NULL,
 	NULL /* terminate */
 };
 
@@ -317,9 +313,9 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	RULE(.class = "Firefox", .tags = 1 << 1)
-	RULE(.class ="Mathpix Snipping Tool", .isfloating = 1)
+	RULE(.class = "Firefox", .tags = 1 << 1, .isfloating = 1)
 	RULE(.class = "Chromium", .tags = 1 << 1)
+	RULE(.class ="Mathpix Snipping Tool", .isfloating = 1)
 	RULE(.class = "discord", .tags = 1 << 2)
 	RULE(.class = "Slack", .tags = 1 << 2)
 	RULE(.class = "Telegram", .tags = 1 << 2)
@@ -474,7 +470,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_x,          killunsel,              {0} },
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {1} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {0} },
-	// { MODKEY,                       XK_u,          focusurgent,            {0} },
 	{ MODKEY,             XK_F5,         xrdb,                   {.v = NULL } },
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },

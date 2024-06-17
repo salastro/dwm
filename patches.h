@@ -689,13 +689,13 @@
  *   xdotool selectwindow -- set_window --urgency 1
  * https://dwm.suckless.org/patches/focusurgent/
  */
-#define FOCUSURGENT_PATCH 1
+#define FOCUSURGENT_PATCH 0
 
 /* By default, dwm responds to _NET_ACTIVE_WINDOW client messages by setting
  * the urgency bit on the named window. This patch activates the window instead.
  * https://dwm.suckless.org/patches/focusonnetactive/
  */
-#define FOCUSONNETACTIVE_PATCH 0
+#define FOCUSONNETACTIVE_PATCH 1
 
 /* Send "fake signals" to dwm for handling, using xsetroot. This will not conflict with the
  * status bar, which also is managed using xsetroot.
