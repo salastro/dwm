@@ -225,6 +225,7 @@ static char *statuscolors[][ColCount] = {
 
 static const char *const autostart[] = {
 	"clipmenud", NULL,
+	"nm-applet", "--no-agent", NULL,
 	"dwmblocks", NULL,
 	"numlockx", NULL,
 	"sxhkd", NULL,
