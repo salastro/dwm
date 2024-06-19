@@ -224,16 +224,10 @@ static char *statuscolors[][ColCount] = {
 };
 
 static const char *const autostart[] = {
-	"clipmenud", NULL,
-	"nm-applet", "--no-agent", NULL,
 	"dwmblocks", NULL,
-	"numlockx", NULL,
 	"sxhkd", NULL,
-	"touchegg", NULL,
-	"syndaemon", "-i", "0.5", "-t", "-K", "-R", NULL,
 	"picom", NULL,
 	"xss-lock", "slock", NULL,
-	"darkman", "run", NULL,
 	NULL /* terminate */
 };
 
