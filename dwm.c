@@ -2428,9 +2428,18 @@ void
 spawn(const Arg *arg)
 {
 	struct sigaction sa;
+	unsigned int n;
+	Client *c;
 
-	if (arg->v == dmenucmd)
+	// TODO: improve implementation
+	if (arg->v == powercmd) {
 		dmenumon[0] = '0' + selmon->num;
+		for (n = 0, c = nexttiled(selmon->clients); c; c = nexttiled(c->next), n++);
+		if (n <= 1 || selmon->lt[selmon->sellt]->arrange == &monocle)
+			powercmd[3] = "-x";
+		else
+			powercmd[3] = "-c";
+	}
 
 	if (fork() == 0)
 	{
