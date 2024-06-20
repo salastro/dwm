@@ -646,7 +646,7 @@ arrangemon(Monitor *m)
 	updatebarpos(selmon);
 	for (Bar *bar = selmon->bar; bar; bar = bar->next)
 		XMoveResizeWindow(dpy, bar->win, bar->bx, bar->by, bar->bw, bar->bh);
-	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
+	strlcpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
 	if (m->lt[m->sellt]->arrange)
 		m->lt[m->sellt]->arrange(m);
 }
@@ -2231,7 +2231,7 @@ setlayout(const Arg *arg)
 		selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] = (Layout *)arg->v;
 	selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
 
-	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
+	strlcpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
 	if (selmon->sel)
 		arrange(selmon);
 	else
@@ -2920,7 +2920,7 @@ updatestatus(void)
 			strncpy(rstext, r, sizeof(rstext) - 1);
 		} else
 			rstext[0] = '\0';
-		strncpy(stext, rawstext, sizeof(stext) - 1);
+		strlcpy(stext, rawstext, sizeof(stext) - 1);
 	}
 	for (m = mons; m; m = m->next)
 		drawbar(m);
