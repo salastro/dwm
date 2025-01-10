@@ -1,5 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 /* appearance */
+#include <X11/X.h>
+#include <X11/Xutil.h>
+#include <string.h>
 static const unsigned int borderpx       = 3;   /* border pixel of windows */
 /* This allows the bar border size to be explicitly set separately from borderpx.
  * If left as 0 then it will default to the borderpx value of the monitor and will
@@ -36,11 +39,6 @@ static const char dmenufont[]            = "monospace:size=12";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
-#define pywal "/home/salastro/.cache/wal/colors-wal-dwm.h"
-
-#if __has_include(pywal)
-#include pywal
-#else
 static char normfgcolor[]                = "#bbbbbb";
 static char normbgcolor[]                = "#222222";
 static char normbordercolor[]            = "#444444";
@@ -70,7 +68,6 @@ static char tagsselfgcolor[]             = "#eeeeee";
 static char tagsselbgcolor[]             = "#005577";
 static char tagsselbordercolor[]         = "#005577";
 static char tagsselfloatcolor[]          = "#005577";
-#endif
 
 static char hidnormfgcolor[]             = "#005577";
 static char hidselfgcolor[]              = "#227799";
@@ -224,9 +221,15 @@ static char *statuscolors[][ColCount] = {
 };
 
 static const char *const autostart[] = {
+	"pipewire", NULL,
+	"cbatticon", NULL,
+	"blueman-applet", NULL,
+	"clipmenud", NULL,
+	"darkman", "run", NULL,
 	"dwmblocks", NULL,
-	"sxhkd", NULL,
+	"numlockx", NULL,
 	"picom", NULL,
+	"sxhkd", NULL,
 	"xss-lock", "slock", NULL,
 	NULL /* terminate */
 };
@@ -308,16 +311,15 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	RULE(.class = "Firefox", .tags = 1 << 1, .isfloating = 1)
-	RULE(.class = "Chromium", .tags = 1 << 1)
+	RULE(.title = "Zen Browser", .tags = 1 << 1)
+	RULE(.class = "zoom", .isfloating = 1)
 	RULE(.class ="Mathpix Snipping Tool", .isfloating = 1)
 	RULE(.class = "discord", .tags = 1 << 2)
 	RULE(.class = "Slack", .tags = 1 << 2)
 	RULE(.class = "Telegram", .tags = 1 << 2)
-	RULE(.class = "ZapZap", .tags = 1 << 2)
+	RULE(.class = "Spotify", .tags = 1 << 2)
 	RULE(.class = "Gimp", .tags = 1 << 3)
 	RULE(.class = "Inkscape", .tags = 1 << 3)
-	RULE(.class = "zoom", .tags = 1 << 3, .isfloating = 1)
 	RULE(.class = "St", .isterminal = 1, .noswallow = 1)
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
 	
@@ -453,7 +455,7 @@ static const Key keys[] = {
 	// { MODKEY|Mod4Mask|ShiftMask,    XK_8,          incrohgaps,             {.i = -1 } },
 	// { MODKEY|Mod4Mask,              XK_9,          incrovgaps,             {.i = +1 } },
 	// { MODKEY|Mod4Mask|ShiftMask,    XK_9,          incrovgaps,             {.i = -1 } },
-	// { MODKEY|Mod4Mask,              XK_0,          togglegaps,             {0} },
+	{ MODKEY|Mod1Mask,              XK_0,          togglegaps,             {0} },
 	// { MODKEY|Mod4Mask|ShiftMask,    XK_0,          defaultgaps,            {0} },
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
 	{ Mod1Mask,              XK_Tab,        shiftviewclients,       { .i = +1 } },
@@ -463,7 +465,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_x,          killunsel,              {0} },
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {1} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {0} },
-	{ MODKEY,             XK_F5,         xrdb,                   {.v = NULL } },
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
@@ -475,7 +476,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return,      togglescratch,          {.ui = 0 } },
 	{ MODKEY|ControlMask,           XK_w,	        setscratch,             {.ui = 0 } },
 	{ MODKEY|ShiftMask,             XK_w,           removescratch,          {.ui = 0 } },
-	{ MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} },
 	{ MODKEY|ControlMask,             XK_s,          togglesticky,           {0} },
 	{ MODKEY,                       XK_0,          view,                   {.ui = ~SPTAGMASK } },
 	{ MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~SPTAGMASK } },
@@ -522,6 +522,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_numbersign, setborderpx,            {.i = 0 } },
 	{ MODKEY|ControlMask,           XK_comma,      cyclelayout,            {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period,     cyclelayout,            {.i = +1 } },
+	{ Mod1Mask, XK_Shift_L, spawn, SHCMD("toggle-keyboard-layout.sh") },
 	TAGKEYS(                        XK_1,                                  0)
 	TAGKEYS(                        XK_2,                                  1)
 	TAGKEYS(                        XK_3,                                  2)

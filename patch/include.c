@@ -42,7 +42,6 @@
 #include "tapresize.c"
 #include "vanitygaps.c"
 #include "warp.c"
-#include "xrdb.c"
 #include "dragmfact.c"
 #include "seamless_restart.c"
 /* Layouts */

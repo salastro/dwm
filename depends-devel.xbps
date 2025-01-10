@@ -1,0 +1,9 @@
+libX11-devel
+libXinerama-devel
+libXft-devel
+fontconfig-devel
+glibc-devel
+imlib2-devel
+fribidi-devel
+pango-devel
+pkg-config

@@ -44,7 +44,6 @@
 #include "tapresize.h"
 #include "vanitygaps.h"
 #include "warp.h"
-#include "xrdb.h"
 /* Layouts */
 #include "layout_bstack.h"
 #include "layout_centeredmaster.h"

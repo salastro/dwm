@@ -2349,7 +2349,7 @@ setup(void)
 	wa.cursor = cursor[CurNormal]->cursor;
 	wa.event_mask = SubstructureRedirectMask|SubstructureNotifyMask
 		|ButtonPressMask|PointerMotionMask|EnterWindowMask
-		|LeaveWindowMask|StructureNotifyMask|PropertyChangeMask;
+		|LeaveWindowMask|StructureNotifyMask|PropertyChangeMask|KeyPressMask;
 	XChangeWindowAttributes(dpy, root, CWEventMask|CWCursor, &wa);
 	XSelectInput(dpy, root, wa.event_mask);
 
@@ -3080,7 +3080,6 @@ main(int argc, char *argv[])
 		die("dwm: cannot get xcb connection\n");
 	checkotherwm();
 	XrmInitialize();
-	loadxrdb();
 	autostart_exec();
 	setup();
 #ifdef __OpenBSD__
