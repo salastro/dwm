@@ -221,7 +221,6 @@ static char *statuscolors[][ColCount] = {
 };
 
 static const char *const autostart[] = {
-	"pipewire", NULL,
 	"cbatticon", NULL,
 	"blueman-applet", NULL,
 	"clipmenud", NULL,
@@ -231,6 +230,7 @@ static const char *const autostart[] = {
 	"picom", NULL,
 	"sxhkd", NULL,
 	"xss-lock", "slock", NULL,
+	"xhost", "+", "local:", NULL,
 	NULL /* terminate */
 };
 

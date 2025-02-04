@@ -2436,7 +2436,7 @@ spawn(const Arg *arg)
 		dmenumon[0] = '0' + selmon->num;
 		for (n = 0, c = nexttiled(selmon->clients); c; c = nexttiled(c->next), n++);
 		if (n <= 1 || selmon->lt[selmon->sellt]->arrange == &monocle)
-			powercmd[3] = "-x";
+			powercmd[3] = "-norm";
 		else
 			powercmd[3] = "-c";
 	}
