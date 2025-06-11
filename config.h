@@ -475,6 +475,7 @@ static const Key keys[] = {
 	{ Mod1Mask,              XK_Tab,        shiftviewclients,       { .i = +1 } },
 	{ Mod1Mask|ShiftMask,              XK_Tab,  shiftviewclients,       { .i = -1 } },
 	{ MODKEY,           XK_z,          showhideclient,         {0} },
+	{ MODKEY|ShiftMask, XK_z, showlasthidden, {0} },
 	{ MODKEY,             XK_c,          killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_x,          killunsel,              {0} },
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {1} },
