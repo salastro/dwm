@@ -254,6 +254,7 @@ struct Client {
 	Client *next;
 	Client *snext;
 	Client *swallowing;
+	Client *hnext; // for hidden stack
 	Monitor *mon;
 	Window win;
 	unsigned int icw, ich;
@@ -477,6 +478,8 @@ static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
+
+static Client *hidden_stack = NULL;
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -1631,7 +1634,7 @@ manage(Window w, XWindowAttributes *wa)
 	updatewmhints(c);
 	updatemotifhints(c);
 
-	if (c->x == c->mon->wx) {
+	if ((c->x == c->mon->wx) && (c->y == c->mon->wy)) {
 	      c->sfx = c->x = c->mon->wx + (c->mon->ww - WIDTH(c)) / 2;
 	      c->sfy = c->y = c->mon->wy + (c->mon->wh - HEIGHT(c)) / 2;
 	}

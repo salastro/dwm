@@ -1,3 +1,18 @@
+void pushhidden(Client *c) {
+	c->hnext = hidden_stack;
+	hidden_stack = c;
+}
+
+Client *pophidden(void) {
+	if (!hidden_stack)
+		return NULL;
+
+	Client *c = hidden_stack;
+	hidden_stack = hidden_stack->hnext;
+	c->hnext = NULL;
+	return c;
+}
+
 void
 hide(Client *c) {
 
@@ -32,6 +47,7 @@ hide(Client *c) {
 	}
 	focus(n);
 	arrange(c->mon);
+	pushhidden(c);
 }
 
 void
@@ -90,3 +106,14 @@ showhideclient(const Arg *arg)
 	}
 }
 
+void
+showlasthidden(const Arg *arg)
+{
+	Client *c = pophidden();
+	if (!c)
+		return;
+
+	show(c);
+	focus(c); // focus the client after showing it
+	restack(c->mon);
+}
