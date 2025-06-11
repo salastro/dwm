@@ -311,18 +311,32 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	RULE(.title = "Zen Browser", .tags = 1 << 1)
+
+	// == Tag 1 Desktop ==
 	RULE(.class = "zoom", .isfloating = 1)
 	RULE(.class ="Mathpix Snipping Tool", .isfloating = 1)
-	RULE(.class = "discord", .tags = 1 << 2)
-	RULE(.class = "Slack", .tags = 1 << 2)
-	RULE(.class = "Telegram", .tags = 1 << 2)
-	RULE(.class = "Spotify", .tags = 1 << 2)
-	RULE(.class = "Gimp", .tags = 1 << 3)
-	RULE(.class = "Inkscape", .tags = 1 << 3)
+	RULE(.class = "MATLAB R2024b - academic use", .noswallow = 1, .isfloating = 1)
 	RULE(.class = "St", .isterminal = 1, .noswallow = 1)
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
-	
+
+	// == Tag 2 Browser ==
+	RULE(.title = "Zen Browser", .tags = 1 << 1)
+
+	// == Tag 3 Workspace ==
+	RULE(.instance = "libreoffice", .tags = 1 << 2)
+	// RULE(.class = "Zathura", .tags = 1 << 2)
+	RULE(.class = "Xournalpp", .tags = 1 << 2)
+
+	// == Tag 4 Media ==
+	RULE(.class = "discord", .tags = 1 << 3)
+	RULE(.class = "Slack", .tags = 1 << 3)
+	RULE(.class = "Telegram", .tags = 1 << 3)
+	RULE(.class = "Spotify", .tags = 1 << 3)
+	RULE(.class = "vlc", .tags = 1 << 4)
+	RULE(.class = "mpv", .tags = 1 << 4)
+	// RULE(.class = "Gimp", .tags = 1 << 3)
+	// RULE(.class = "Inkscape", .tags = 1 << 3)
+
 	// At the end to overwite previous rules
 	RULE(.wintype = WTYPE "DIALOG", .isfloating = 1)
 	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
