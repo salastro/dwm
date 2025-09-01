@@ -646,9 +646,6 @@ arrange(Monitor *m)
 void
 arrangemon(Monitor *m)
 {
-	updatebarpos(selmon);
-	for (Bar *bar = selmon->bar; bar; bar = bar->next)
-		XMoveResizeWindow(dpy, bar->win, bar->bx, bar->by, bar->bw, bar->bh);
 	strlcpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
 	if (m->lt[m->sellt]->arrange)
 		m->lt[m->sellt]->arrange(m);
@@ -2431,18 +2428,6 @@ void
 spawn(const Arg *arg)
 {
 	struct sigaction sa;
-	unsigned int n;
-	Client *c;
-
-	// TODO: improve implementation
-	if (arg->v == powercmd) {
-		dmenumon[0] = '0' + selmon->num;
-		for (n = 0, c = nexttiled(selmon->clients); c; c = nexttiled(c->next), n++);
-		if (n <= 1 || selmon->lt[selmon->sellt]->arrange == &monocle)
-			powercmd[3] = "-norm";
-		else
-			powercmd[3] = "-c";
-	}
 
 	if (fork() == 0)
 	{
@@ -2717,13 +2702,8 @@ updatebarpos(Monitor *m)
 	int barborder = 0;
 	if (enablegaps)
 	{
-		unsigned int n; Client *c;
-		for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-		if (n > 1 && m->lt[m->sellt]->arrange != monocle) {
-			y_pad = gappoh;
-			x_pad = gappov;
-			barborder = (barborderpx ? barborderpx : borderpx);
-		}
+		y_pad = gappoh;
+		x_pad = gappov;
 	}
 
 	for (bar = m->bar; bar; bar = bar->next) {
