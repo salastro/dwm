@@ -317,7 +317,10 @@ static const Rule rules[] = {
 	RULE(.class ="Mathpix Snipping Tool", .isfloating = 1)
 	RULE(.class = "MATLAB R2024b - academic use", .noswallow = 1, .isfloating = 1)
 	RULE(.class = "St", .isterminal = 1, .noswallow = 1)
+	RULE(.title = "Event Tester", .noswallow = 1)
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
+	RULE(.instance = "matplotlib", .noswallow = 1, .isfloating = 1)
+	RULE(.class = "Matplotlib", .noswallow = 1, .isfloating = 1)
 
 	// == Tag 2 Browser ==
 	RULE(.title = "Zen Browser", .tags = 1 << 1)
@@ -325,7 +328,7 @@ static const Rule rules[] = {
 	// == Tag 3 Workspace ==
 	RULE(.instance = "libreoffice", .tags = 1 << 2)
 	// RULE(.class = "Zathura", .tags = 1 << 2)
-	RULE(.class = "Xournalpp", .tags = 1 << 2)
+	RULE(.instance = "com.github.xournalpp.xournalpp", .tags = 1 << 2)
 
 	// == Tag 4 Media ==
 	RULE(.class = "discord", .tags = 1 << 3)
@@ -494,10 +497,10 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,             XK_s,          togglesticky,           {0} },
 	{ MODKEY,                       XK_0,          view,                   {.ui = ~SPTAGMASK } },
 	{ MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~SPTAGMASK } },
-	{ MODKEY,                       XK_comma,      focusmon,               {.i = -1 } },
-	{ MODKEY,                       XK_period,     focusmon,               {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,      tagmon,                 {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period,     tagmon,                 {.i = +1 } },
+	// { MODKEY,                       XK_comma,      focusmon,               {.i = -1 } },
+	// { MODKEY,                       XK_period,     focusmon,               {.i = +1 } },
+	// { MODKEY|ShiftMask,             XK_comma,      tagmon,                 {.i = -1 } },
+	// { MODKEY|ShiftMask,             XK_period,     tagmon,                 {.i = +1 } },
 	// { MODKEY|ControlMask,           XK_Up,         switchtag,              { .ui = SWITCHTAG_UP    | SWITCHTAG_VIEW } },
 	// { MODKEY|ControlMask,           XK_Down,       switchtag,              { .ui = SWITCHTAG_DOWN  | SWITCHTAG_VIEW } },
 	// { MODKEY|ControlMask,           XK_Right,      switchtag,              { .ui = SWITCHTAG_RIGHT | SWITCHTAG_VIEW } }, // note keybinding conflict with placedir
