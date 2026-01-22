@@ -12,6 +12,7 @@
 #include "bar_winicon.c"
 #include "bar_tabgroups.c"
 #include "bar_taggrid.c"
+#include "bar_seltagicon.c"
 #include "bar_wintitle.c"
 #include "bar_flexwintitle.c"
 #include "bar_wintitle_floating.c"
@@ -51,4 +52,3 @@
 #include "layout_deck.c"
 #include "layout_monocle.c"
 #include "layout_tile.c"
-
