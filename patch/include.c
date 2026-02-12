@@ -45,6 +45,7 @@
 #include "warp.c"
 #include "dragmfact.c"
 #include "seamless_restart.c"
+#include "kblayout.c"
 /* Layouts */
 #include "layout_facts.c"
 #include "layout_bstack.c"

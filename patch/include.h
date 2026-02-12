@@ -45,6 +45,7 @@
 #include "tapresize.h"
 #include "vanitygaps.h"
 #include "warp.h"
+#include "kblayout.h"
 /* Layouts */
 #include "layout_bstack.h"
 #include "layout_centeredmaster.h"
