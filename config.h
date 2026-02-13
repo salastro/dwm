@@ -3,6 +3,14 @@
 #include <X11/X.h>
 #include <X11/Xutil.h>
 #include <string.h>
+
+/* Keyboard layout switching on modifier release
+ * Triggers only when both keys are pressed and released without any other key */
+static const int kblayout_enabled = 1;			/* 0 to disable */
+static const KeySym kblayout_key1 = XK_Alt_L;	/* first modifier */
+static const KeySym kblayout_key2 = XK_Shift_L; /* second modifier */
+static const char *kblayout_cmd[] = {"toggle-keyboard-layout.sh", NULL};
+
 static const unsigned int borderpx = 3; /* border pixel of windows */
 /* This allows the bar border size to be explicitly set separately from borderpx.
  * If left as 0 then it will default to the borderpx value of the monitor and will

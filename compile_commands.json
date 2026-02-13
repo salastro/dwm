@@ -18,8 +18,8 @@
       "-DXINERAMA",
       "drw.c"
     ],
-    "directory": "/home/salastro/.srcpkgs/dwm-flexipatch",
-    "file": "/home/salastro/.srcpkgs/dwm-flexipatch/drw.c"
+    "directory": "/home/salastro/.srcpkgs/dwm",
+    "file": "/home/salastro/.srcpkgs/dwm/drw.c"
   },
   {
     "arguments": [
@@ -40,8 +40,8 @@
       "-DXINERAMA",
       "dwm.c"
     ],
-    "directory": "/home/salastro/.srcpkgs/dwm-flexipatch",
-    "file": "/home/salastro/.srcpkgs/dwm-flexipatch/dwm.c"
+    "directory": "/home/salastro/.srcpkgs/dwm",
+    "file": "/home/salastro/.srcpkgs/dwm/dwm.c"
   },
   {
     "arguments": [
@@ -62,7 +62,7 @@
       "-DXINERAMA",
       "util.c"
     ],
-    "directory": "/home/salastro/.srcpkgs/dwm-flexipatch",
-    "file": "/home/salastro/.srcpkgs/dwm-flexipatch/util.c"
+    "directory": "/home/salastro/.srcpkgs/dwm",
+    "file": "/home/salastro/.srcpkgs/dwm/util.c"
   }
 ]

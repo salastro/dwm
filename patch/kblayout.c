@@ -1,7 +1,7 @@
-/* Keyboard layout switch on Alt+Shift release (without other keys pressed)
+/* Keyboard layout switch on modifier release (without other keys pressed)
  *
  * This implements the "switch on release only if no other key was pressed" behavior
- * that allows Alt+Shift+<key> combinations to work in applications without
+ * that allows modifier+<key> combinations to work in applications without
  * triggering a layout switch.
  */
 
@@ -9,6 +9,9 @@
 
 void setupkblayout(void)
 {
+    if (!kblayout_enabled)
+        return;
+
     int event, error;
     XIEventMask evmask;
     unsigned char mask[(XI_LASTEVENT + 7) / 8] = {0};
@@ -41,12 +44,15 @@ void setupkblayout(void)
 
 void triggerkblayoutswitch(void)
 {
-    const Arg a = SHCMD("toggle-keyboard-layout.sh");
+    const Arg a = {.v = kblayout_cmd};
     spawn(&a);
 }
 
 void handlekblayoutevent(XEvent *e)
 {
+    if (!kblayout_enabled)
+        return;
+
     XGenericEventCookie *cookie = &e->xcookie;
 
     if (e->type != GenericEvent || cookie->extension != xi_opcode)
@@ -60,18 +66,18 @@ void handlekblayoutevent(XEvent *e)
 
     if (cookie->evtype == XI_RawKeyPress)
     {
-        if (keysym == XK_Alt_L)
+        if (keysym == kblayout_key1)
         {
-            kblayout_alt_l_pressed = 1;
+            kblayout_key1_pressed = 1;
         }
-        else if (keysym == XK_Shift_L)
+        else if (keysym == kblayout_key2)
         {
-            kblayout_shift_l_pressed = 1;
+            kblayout_key2_pressed = 1;
         }
         else
         {
-            /* Any other key pressed while Alt+Shift held */
-            if (kblayout_alt_l_pressed && kblayout_shift_l_pressed)
+            /* Any other key pressed while both modifiers held */
+            if (kblayout_key1_pressed && kblayout_key2_pressed)
             {
                 kblayout_other_key_pressed = 1;
             }
@@ -79,28 +85,28 @@ void handlekblayoutevent(XEvent *e)
     }
     else if (cookie->evtype == XI_RawKeyRelease)
     {
-        if (keysym == XK_Alt_L)
+        if (keysym == kblayout_key1)
         {
             /* Check if we should trigger layout switch */
-            if (kblayout_alt_l_pressed && kblayout_shift_l_pressed && !kblayout_other_key_pressed)
+            if (kblayout_key1_pressed && kblayout_key2_pressed && !kblayout_other_key_pressed)
             {
                 triggerkblayoutswitch();
             }
-            kblayout_alt_l_pressed = 0;
-            if (!kblayout_shift_l_pressed)
+            kblayout_key1_pressed = 0;
+            if (!kblayout_key2_pressed)
             {
                 kblayout_other_key_pressed = 0;
             }
         }
-        else if (keysym == XK_Shift_L)
+        else if (keysym == kblayout_key2)
         {
             /* Check if we should trigger layout switch */
-            if (kblayout_alt_l_pressed && kblayout_shift_l_pressed && !kblayout_other_key_pressed)
+            if (kblayout_key1_pressed && kblayout_key2_pressed && !kblayout_other_key_pressed)
             {
                 triggerkblayoutswitch();
             }
-            kblayout_shift_l_pressed = 0;
-            if (!kblayout_alt_l_pressed)
+            kblayout_key2_pressed = 0;
+            if (!kblayout_key1_pressed)
             {
                 kblayout_other_key_pressed = 0;
             }
