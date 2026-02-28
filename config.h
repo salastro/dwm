@@ -323,60 +323,57 @@ static const Rule rules[] = {
 
 	// == Tag 1 Desktop ==
 	RULE(.class = "zoom", .isfloating = 1)
-		RULE(.class = "Mathpix Snipping Tool", .isfloating = 1)
-			RULE(.class = "MATLAB R2024b - academic use", .noswallow = 1, .isfloating = 1)
-				RULE(.class = "St", .isterminal = 1, .noswallow = 1)
-					RULE(.class = "Alacritty", .isterminal = 1, .noswallow = 1)
-						RULE(.class = "kitty", .isterminal = 1, .noswallow = 1)
-							RULE(.class = "XTerm", .isterminal = 1, .noswallow = 1)
-								RULE(.title = "Event Tester", .noswallow = 1)
-									RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
-										RULE(.instance = "matplotlib", .noswallow = 1, .isfloating = 1)
-											RULE(.class = "Matplotlib", .noswallow = 1, .isfloating = 1)
-												RULE(.class = "Pavucontrol", .isfloating = 1)
-													RULE(.class = "Blueman-manager", .isfloating = 1)
-														RULE(.class = "Nm-connection-editor", .isfloating = 1)
-															RULE(.class = "Arandr", .isfloating = 1)
-																RULE(.class = "Lxappearance", .isfloating = 1)
+	RULE(.class = "Mathpix Snipping Tool", .isfloating = 1)
+	RULE(.class = "MATLAB R2024b - academic use", .noswallow = 1, .isfloating = 1)
+	RULE(.class = "St", .isterminal = 1, .noswallow = 1)
+	RULE(.class = "Alacritty", .isterminal = 1, .noswallow = 1)
+	RULE(.class = "kitty", .isterminal = 1, .noswallow = 1)
+	RULE(.class = "XTerm", .isterminal = 1, .noswallow = 1)
+	RULE(.title = "Event Tester", .noswallow = 1)
+	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
+	RULE(.instance = "matplotlib", .noswallow = 1, .isfloating = 1)
+	RULE(.class = "Matplotlib", .noswallow = 1, .isfloating = 1)
+	RULE(.class = "Pavucontrol", .isfloating = 1)
+	RULE(.class = "Blueman-manager", .isfloating = 1)
+	RULE(.class = "Nm-connection-editor", .isfloating = 1)
+	RULE(.class = "Arandr", .isfloating = 1)
+	RULE(.class = "Lxappearance", .isfloating = 1)
 
 	// == Tag 2 Browser ==
 	RULE(.title = "Zen Browser", .tags = 1 << 1)
-		RULE(.class = "firefox", .tags = 1 << 1)
-			RULE(.class = "Firefox", .tags = 1 << 1)
-				RULE(.class = "Chromium", .tags = 1 << 1)
-					RULE(.class = "Google-chrome", .tags = 1 << 1)
-						RULE(.class = "Brave-browser", .tags = 1 << 1)
-							RULE(.class = "qutebrowser", .tags = 1 << 1)
+	RULE(.class = "firefox", .tags = 1 << 1)
+	RULE(.class = "Firefox", .tags = 1 << 1)
+	RULE(.class = "Chromium", .tags = 1 << 1)
+	RULE(.class = "Google-chrome", .tags = 1 << 1)
+	RULE(.class = "Brave-browser", .tags = 1 << 1)
+	RULE(.class = "qutebrowser", .tags = 1 << 1)
 
 	// == Tag 3 Workspace ==
 	RULE(.instance = "libreoffice", .tags = 1 << 2)
-		RULE(.class = "libreoffice-startcenter", .tags = 1 << 2)
-			RULE(.class = "Soffice", .tags = 1 << 2)
-				RULE(.instance = "com.github.xournalpp.xournalpp", .tags = 1 << 2)
-					RULE(.class = "Zathura", .tags = 1 << 2)
-						RULE(.class = "Evince", .tags = 1 << 2)
-							RULE(.class = "okular", .tags = 1 << 2)
-								RULE(.class = "Obsidian", .tags = 1 << 2)
-									RULE(.class = "notion-app", .tags = 1 << 2)
-										RULE(.class = "logseq", .tags = 1 << 2)
+	RULE(.class = "libreoffice-startcenter", .tags = 1 << 2)
+	RULE(.class = "Soffice", .tags = 1 << 2)
+	RULE(.instance = "com.github.xournalpp.xournalpp", .tags = 1 << 2)
+	RULE(.class = "Obsidian", .tags = 1 << 2)
+	RULE(.class = "notion-app", .tags = 1 << 2)
+	RULE(.class = "logseq", .tags = 1 << 2)
 
 	// == Tag 4 Communication ==
 	RULE(.class = "discord", .tags = 1 << 3)
-		RULE(.class = "Slack", .tags = 1 << 3)
-			RULE(.class = "TelegramDesktop", .tags = 1 << 3)
-				RULE(.class = "Telegram", .tags = 1 << 3)
-					RULE(.class = "Signal", .tags = 1 << 3)
-						RULE(.class = "Element", .tags = 1 << 3)
-							RULE(.class = "whatsapp-for-linux", .tags = 1 << 3)
-								RULE(.class = "Microsoft Teams - Preview", .tags = 1 << 3)
-									RULE(.class = "teams-for-linux", .tags = 1 << 3)
-										RULE(.class = "Thunderbird", .tags = 1 << 3)
+	RULE(.class = "Slack", .tags = 1 << 3)
+	RULE(.class = "TelegramDesktop", .tags = 1 << 3)
+	RULE(.class = "Telegram", .tags = 1 << 3)
+	RULE(.class = "Signal", .tags = 1 << 3)
+	RULE(.class = "Element", .tags = 1 << 3)
+	RULE(.class = "whatsapp-for-linux", .tags = 1 << 3)
+	RULE(.class = "Microsoft Teams - Preview", .tags = 1 << 3)
+	RULE(.class = "teams-for-linux", .tags = 1 << 3)
+	RULE(.class = "Thunderbird", .tags = 1 << 3)
 
 	// At the end to overwrite previous rules
 	RULE(.wintype = WTYPE "DIALOG", .isfloating = 1)
-		RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
-			RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
-				RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)};
+	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
+	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
+	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)};
 
 static const MonitorRule monrules[] = {
 	/* monitor  tag   layout  mfact  nmaster  showbar  topbar */
@@ -566,14 +563,14 @@ static const Key keys[] = {
 	{MODKEY | ControlMask, XK_comma, cyclelayout, {.i = -1}},
 	{MODKEY | ControlMask, XK_period, cyclelayout, {.i = +1}},
 	TAGKEYS(XK_1, 0)
-		TAGKEYS(XK_2, 1)
-			TAGKEYS(XK_3, 2)
-				TAGKEYS(XK_4, 3)
-					TAGKEYS(XK_5, 4)
-						TAGKEYS(XK_6, 5)
-							TAGKEYS(XK_7, 6)
-								TAGKEYS(XK_8, 7)
-									TAGKEYS(XK_9, 8)};
+	TAGKEYS(XK_2, 1)
+	TAGKEYS(XK_3, 2)
+	TAGKEYS(XK_4, 3)
+	TAGKEYS(XK_5, 4)
+	TAGKEYS(XK_6, 5)
+	TAGKEYS(XK_7, 6)
+	TAGKEYS(XK_8, 7)
+	TAGKEYS(XK_9, 8)};
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
