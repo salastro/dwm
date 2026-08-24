@@ -2154,7 +2154,7 @@ void restack(Monitor *m)
 	XSync(dpy, False);
 	while (XCheckMaskEvent(dpy, EnterWindowMask, &ev))
 		;
-	if (m == selmon && (m->tagset[m->seltags] & m->sel->tags) && (m->lt[m->sellt]->arrange != &monocle || m->sel->isfloating))
+	if (m == selmon && ISVISIBLE(m->sel) && (m->lt[m->sellt]->arrange != &monocle || m->sel->isfloating))
 		warp(m->sel);
 }
 
