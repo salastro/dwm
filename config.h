@@ -28,7 +28,7 @@ static const int topbar = 1;			   /* 0 means bottom bar */
 #define ICONSIZE 17.5					   /* icon size */
 #define ICONSPACING 5					   /* space between icon and title */
 /* Status is to be shown on: -1 (all monitors), 0 (a specific monitor by index), 'A' (active monitor) */
-static const int statusmon = 'A';
+static const int statusmon = 0;
 static const unsigned int systrayspacing = 10; /* systray spacing */
 static const int showsystray = 1;			   /* 0 means no systray */
 
