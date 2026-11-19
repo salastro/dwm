@@ -3213,7 +3213,15 @@ int main(int argc, char *argv[])
 	scan();
 	run();
 	cleanup();
-	XCloseDisplay(dpy);
+	/*
+	 * No XCloseDisplay(): it frees each extension's per-display data before
+	 * its final XSync(). A pending XInput2 raw key event (kblayout patch; e.g.
+	 * releasing Super+Shift+Q) then makes libXi re-query the extension while
+	 * libX11 already holds the display lock, and dwm deadlocks. Exiting or
+	 * exec'ing closes the connection anyway (the socket is close-on-exec);
+	 * XFlush() still sends the last requests from cleanup().
+	 */
+	XFlush(dpy);
 	if (restart)
 		execvp(argv[0], argv);
 	return EXIT_SUCCESS;
