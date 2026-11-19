@@ -153,6 +153,7 @@ enum
 	NetNumberOfDesktops,
 	NetCurrentDesktop,
 	NetClientList,
+	NetClientListStacking,
 	NetLast
 }; /* EWMH atoms */
 
@@ -441,6 +442,7 @@ static void unmapnotify(XEvent *e);
 static void updatebarpos(Monitor *m);
 static void updatebars(void);
 static void updateclientlist(void);
+static void updateclientliststacking(void);
 static int updategeom(void);
 static void updatenumlockmask(void);
 static void updatesizehints(Client *c);
@@ -1423,6 +1425,7 @@ void focus(Client *c)
 			seturgent(c, 0);
 		detachstack(c);
 		attachstack(c);
+		updateclientliststacking();
 		grabbuttons(c, 1);
 		setfocus(c);
 	}
@@ -1747,6 +1750,7 @@ void manage(Window w, XWindowAttributes *wa)
 	attachstack(c);
 	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
 					(unsigned char *)&(c->win), 1);
+	updateclientliststacking();
 	XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
 
 	if (!HIDDEN(c))
@@ -2426,6 +2430,7 @@ void setup(void)
 	netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
+	netatom[NetClientListStacking] = XInternAtom(dpy, "_NET_CLIENT_LIST_STACKING", False);
 	motifatom = XInternAtom(dpy, "_MOTIF_WM_HINTS", False);
 	/* init cursors */
 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
@@ -2461,6 +2466,7 @@ void setup(void)
 	setdesktopnames();
 	setviewport();
 	XDeleteProperty(dpy, root, netatom[NetClientList]);
+	XDeleteProperty(dpy, root, netatom[NetClientListStacking]);
 	/* select events */
 	wa.cursor = cursor[CurNormal]->cursor;
 	wa.event_mask = SubstructureRedirectMask | SubstructureNotifyMask | ButtonPressMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask | StructureNotifyMask | PropertyChangeMask | KeyPressMask;
@@ -2868,6 +2874,25 @@ void updateclientlist()
 		for (c = m->clients; c; c = c->next)
 			XChangeProperty(dpy, root, netatom[NetClientList],
 							XA_WINDOW, 32, PropModeAppend,
+							(unsigned char *)&(c->win), 1);
+	updateclientliststacking();
+}
+
+/*
+ * _NET_CLIENT_LIST_STACKING: managed windows in bottom-to-top order. Zoom
+ * reads it to offer individual windows for screen sharing. dwm's focus stack
+ * is most-recent-first, so prepending each window yields bottom-to-top.
+ */
+void updateclientliststacking(void)
+{
+	Client *c;
+	Monitor *m;
+
+	XDeleteProperty(dpy, root, netatom[NetClientListStacking]);
+	for (m = mons; m; m = m->next)
+		for (c = m->stack; c; c = c->snext)
+			XChangeProperty(dpy, root, netatom[NetClientListStacking],
+							XA_WINDOW, 32, PropModePrepend,
 							(unsigned char *)&(c->win), 1);
 }
 
