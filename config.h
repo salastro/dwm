@@ -242,6 +242,7 @@ static const char *const autostart[] = {
 	"dwmblocks", NULL,
 	"picom", NULL,
 	"sxhkd", NULL,
+	"touchegg", NULL,   /* touchpad gestures (client; the daemon is a system service) */
 	"xss-lock", "slock", NULL,
 	"inhibit-idle-on-media", NULL,
 	NULL /* terminate */
