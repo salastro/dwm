@@ -9,7 +9,7 @@
 static const int kblayout_enabled = 1;			/* 0 to disable */
 static const KeySym kblayout_key1 = XK_Alt_L;	/* first modifier */
 static const KeySym kblayout_key2 = XK_Shift_L; /* second modifier */
-static const char *kblayout_cmd[] = {"toggle-keyboard-layout.sh", NULL};
+static const char *kblayout_cmd[] = {"toggle-keyboard-layout", NULL};
 
 static const unsigned int borderpx = 3; /* border pixel of windows */
 /* This allows the bar border size to be explicitly set separately from borderpx.
@@ -228,18 +228,22 @@ static char *statuscolors[][ColCount] = {
 	[SchemeUrg] = {urgfgcolor, urgbgcolor, urgbordercolor, urgfloatcolor},
 };
 
+/* Long-running programs of the dwm session; dwm stops them when it exits.
+ * One-shot setup (xrdb, xrandr, numlockx, xhost, ...) lives in the session
+ * script in modules/dwm.nix. @polkitAgent@ is filled in by pkgs/default.nix. */
 static const char *const autostart[] = {
-	"cbatticon", NULL,
+	"@polkitAgent@", NULL,
+	"udiskie", "--tray", NULL,
 	"blueman-applet", NULL,
-	"birdtray", NULL,
+	"poweralertd", "-s", NULL,   /* battery/charger notifications from UPower events */
+	"power-profile-notify", NULL, /* notify on power mode changes (Fn+Q) */
 	"clipmenud", NULL,
 	"darkman", "run", NULL,
 	"dwmblocks", NULL,
-	"numlockx", NULL,
 	"picom", NULL,
 	"sxhkd", NULL,
 	"xss-lock", "slock", NULL,
-	"xhost", "+", "local:", NULL,
+	"inhibit-idle-on-media", NULL,
 	NULL /* terminate */
 };
 
