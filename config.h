@@ -233,6 +233,7 @@ static char *statuscolors[][ColCount] = {
  * script in modules/dwm.nix. @polkitAgent@ is filled in by pkgs/default.nix. */
 static const char *const autostart[] = {
 	"@polkitAgent@", NULL,
+	"xsettingsd", NULL,   /* XSETTINGS: live GTK theme changes (darkman's gtk3.sh writes its config) */
 	"udiskie", "--tray", NULL,
 	"blueman-applet", NULL,
 	"poweralertd", "-s", NULL,   /* battery/charger notifications from UPower events */
