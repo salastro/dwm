@@ -68,6 +68,12 @@ draw_systray(Bar *bar, BarArg *a)
 	wc.sibling = bar->win;
 	XConfigureWindow(dpy, systray->win, CWSibling|CWStackMode, &wc);
 
+	/* The tray's own background shows in the gaps between icons; refresh it
+	 * like the icons' below, or it keeps the colours from before an xrdb reload */
+	wa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
+	XChangeWindowAttributes(dpy, systray->win, CWBackPixel, &wa);
+	XClearWindow(dpy, systray->win);
+
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	for (w = 0, i = systray->icons; i; i = i->next) {
 		wa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
