@@ -36,7 +36,9 @@ draw_systray(Bar *bar, BarArg *a)
 		wa.event_mask = ButtonPressMask|ExposureMask;
 		wa.border_pixel = 0;
 		systray->h = MIN(a->h, drw->fonts->h);
-		wa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
+		/* Fully transparent: the tray sits over the (translucent) bar, so its
+		 * own bar colour would stack and show darker in the gaps between icons */
+		wa.background_pixel = 0;
 		wa.colormap = cmap;
 		systray->win = XCreateWindow(dpy, root, bar->bx + a->x + lrpad / 2, -systray->h, MAX(a->w + 40, 1), systray->h, 0, depth,
 						InputOutput, visual,
@@ -67,12 +69,6 @@ draw_systray(Bar *bar, BarArg *a)
 	wc.stack_mode = Above;
 	wc.sibling = bar->win;
 	XConfigureWindow(dpy, systray->win, CWSibling|CWStackMode, &wc);
-
-	/* The tray's own background shows in the gaps between icons; refresh it
-	 * like the icons' below, or it keeps the colours from before an xrdb reload */
-	wa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
-	XChangeWindowAttributes(dpy, systray->win, CWBackPixel, &wa);
-	XClearWindow(dpy, systray->win);
 
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	for (w = 0, i = systray->icons; i; i = i->next) {
