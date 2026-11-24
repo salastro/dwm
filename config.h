@@ -42,8 +42,8 @@ static int floatindicatortype = INDICATOR_NONE;
 static const int quit_empty_window_count = 1; /* only allow dwm to quit if no (<= count) windows are open */
 static const char statussep = ';';			  /* separator between status bars */
 static void (*bartabmonfns[])(Monitor *) = {monocle /* , customlayoutfn */};
-static const char *fonts[] = {"monospace:size=12", "fontawesome:size=13", "JoyPixels:pixelsize=14"};
-static const char dmenufont[] = "monospace:size=12";
+static const char *fonts[] = {"monospace:size=11", "Noto Color Emoji:pixelsize=13", "FiraCode Nerd Font:size=11"};
+static const char dmenufont[] = "monospace:size=11";
 
 static char c000000[] = "#000000"; // placeholder value
 
