@@ -154,6 +154,7 @@ enum
 	NetCurrentDesktop,
 	NetClientList,
 	NetClientListStacking,
+	NetGTKFrameExtents, /* advertised only: lets GTK 3 give popup menus an RGBA visual (no black rounded corners) */
 	NetLast
 }; /* EWMH atoms */
 
@@ -2431,6 +2432,7 @@ void setup(void)
 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
 	netatom[NetClientListStacking] = XInternAtom(dpy, "_NET_CLIENT_LIST_STACKING", False);
+	netatom[NetGTKFrameExtents] = XInternAtom(dpy, "_GTK_FRAME_EXTENTS", False);
 	motifatom = XInternAtom(dpy, "_MOTIF_WM_HINTS", False);
 	/* init cursors */
 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
